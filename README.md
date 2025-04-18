@@ -12,8 +12,3 @@ Postly is a simple social media application built with Django. It allows users t
 ## 🛠️ **Tech Stack**
 - **Frontend**: HTML, CSS, Bootstrap
 - **Backend**: Python, Django
-
-## ⚙️ **Setup & Installation**
-1. **Clone the repository**  
-   ```bash
-   git clone https://github.com/your-username/Postly.git
