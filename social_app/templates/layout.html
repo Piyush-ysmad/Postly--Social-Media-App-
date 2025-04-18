@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Postly{% endblock %}</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #5D5FEF;
+      --primary-hover: #4F46E5;
+      --danger: #EF4444;
+      --danger-hover: #DC2626;
+      --bg: #F9FAFB;
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: 'Poppins', sans-serif;
+      padding-top: 72px;
+    }
+
+    /* Navbar */
+    .floating-navbar {
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      margin: 8px auto;
+      width: 95%;
+      z-index: 1030;
+      padding: 6px 12px;
+    }
+
+    .navbar-brand {
+      color: var(--primary) !important;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+
+    .nav-link {
+      color: var(--primary) !important;
+      font-weight: 500;
+    }
+
+    .navbar .btn {
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 6px;
+      margin-left: 8px;
+      color: #fff !important;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .navbar .btn-primary {
+      background-color: var(--primary);
+      border: none;
+    }
+
+    .navbar .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .navbar .btn-danger {
+      background-color: var(--danger);
+      border: none;
+    }
+
+    .navbar .btn-danger:hover {
+      background-color: var(--danger-hover);
+      transform: translateY(-1px);
+    }
+
+    .container-style {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      width: 95%;
+      margin: 20px auto;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top floating-navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'screen_list' %}">Postly</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarRightContent" aria-controls="navbarRightContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarRightContent">
+        <!-- ✅ This flex-nowrap forces buttons to stay in one line -->
+        <div class="d-flex align-items-center flex-nowrap">
+          <a href="{% url 'screen_list' %}" class="btn btn-primary">Home</a>
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+          {% else %}
+            <a href="{% url 'register' %}" class="btn btn-danger">Join</a>
+            <a href="{% url 'login' %}" class="btn btn-primary">Sign In</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ✅ Main Content -->
+  <div class="main-content container-style">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

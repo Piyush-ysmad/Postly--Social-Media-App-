@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Delete Post
+{% endblock %}
+
+{% block content %}
+<style>
+  /* Ensure the content doesn't overflow and pushes the navbar */
+  body {
+    padding-top: 80px; /* Space for fixed navbar */
+  }
+
+  .delete-container {
+    max-width: 400px;
+    margin: 20px auto; /* Center the content and add top/bottom margins */
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  h1 {
+    text-align: center;
+    color: #FF5A5F;  /* Red color for delete-related actions */
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;  /* Align buttons side by side */
+    gap: 10px;  /* Small gap between buttons */
+  }
+
+  .btn-danger, .btn-success {
+    background-color: #FF5A5F;
+    color: white;
+    border: none;
+    padding: 12px 24px;  /* Adjust padding */
+    font-weight: 600;
+    border-radius: 6px;
+    width: 48%;  /* Set width for buttons */
+    transition: all 0.3s ease;
+  }
+
+  .btn-danger {
+    background-color: #FF5A5F;
+  }
+
+  .btn-danger:hover {
+    background-color: #E04E56;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-success {
+    background-color: #5D5FEF;
+  }
+
+  .btn-success:hover {
+    background-color: #4F46E5;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Keyframe for fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Make sure navbar remains above content */
+  .navbar {
+    z-index: 1030; /* Keeps the navbar on top */
+  }
+
+  /* Fix layout when navbar is fixed */
+  body {
+    padding-top: 80px; /* Make space for navbar */
+  }
+</style>
+
+<div class="delete-container">
+  <h1>Are you sure you want to delete the post?</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="button-container">
+      <button class="btn btn-danger" type="submit">Delete</button>
+      <a class="btn btn-success" href="{% url 'screen_list' %}">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Forms – Postly
+{% endblock %}
+
+{% block content %}
+<style>
+  .form-container {
+    max-width: 600px; /* Increased width */
+    margin: 0 auto;
+    padding: 20px 30px; /* Reduced vertical padding for shorter height */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  h2 {
+    text-align: center;
+    color: #5D5FEF; /* Blue color */
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  form p {
+    margin-bottom: 16px;
+  }
+
+  label {
+    font-weight: 500;
+    color: #4A5568;
+    font-size: 0.9rem;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea,
+  input[type="file"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #CBD5E0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    margin-top: 6px;
+    background-color: #F7FAFC;
+    transition: border 0.3s ease;
+    margin-bottom: 12px; /* Reduced bottom margin for shorter form */
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #5D5FEF; /* Blue focus color */
+  }
+
+  .btn-submit {
+    background-color: #5D5FEF; /* Blue color */
+    color: white !important;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 12px; /* Reduced margin to shorten the form */
+  }
+
+  .btn-submit:hover {
+    background-color: #4F46E5; /* Darker blue on hover */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: white !important;
+  }
+
+  a {
+    display: block;
+    text-align: center;
+    margin-top: 12px; /* Reduced top margin for shorter form */
+    color: #5D5FEF;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover {
+    color: #4F46E5; /* Darker blue on hover */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<div class="form-container">
+  <h2>
+    {% if form.instance.pk %}
+      Edit Post
+    {% else %}
+      Create Post
+    {% endif %}
+  </h2>
+
+  <form method="post" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-submit" type="submit">Submit</button>
+  </form>
+
+  <a href="{% url 'screen_list' %}">Back to Posts</a>
+</div>
+
+{% endblock %}

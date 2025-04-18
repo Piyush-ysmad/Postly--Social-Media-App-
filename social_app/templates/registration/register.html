@@ -1,0 +1,113 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Register – Postly
+{% endblock %}
+
+{% block content %}
+<style>
+  .register-container {
+    max-width: 600px; /* Increased width */
+    margin: 0 auto;
+    padding: 20px 30px; /* Reduced vertical padding to decrease height */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  h2 {
+    text-align: center;
+    color: #5D5FEF;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  form p {
+    margin-bottom: 16px; /* Reduced margin between paragraphs */
+  }
+
+  label {
+    font-weight: 500;
+    color: #4A5568;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    width: 100%;
+    padding: 8px 12px; /* Reduced padding to make input fields more concise */
+    border: 1px solid #CBD5E0;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-top: 6px;
+    background-color: #F7FAFC;
+    transition: border 0.3s ease;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #5D5FEF;
+  }
+
+  .btn-primary {
+    background-color: #5D5FEF;
+    color: white !important;
+    padding: 12px 24px; /* Increased horizontal padding for a better button */
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 16px; /* Adjusted margin-top for button */
+  }
+
+  .btn-primary:hover {
+    background-color: #4F46E5;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: white !important;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 20px;
+    color: #718096;
+  }
+
+  a {
+    color: #5D5FEF;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover {
+    color: #4F46E5;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<div class="register-container">
+  <h2>Register for Postly</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Register</button>
+  </form>
+  <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+</div>
+
+{% endblock %}
